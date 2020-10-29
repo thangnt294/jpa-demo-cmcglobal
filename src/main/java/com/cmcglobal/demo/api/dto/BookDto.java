@@ -1,11 +1,14 @@
 package com.cmcglobal.demo.api.dto;
 
+import com.cmcglobal.demo.api.entity.Book;
+import com.cmcglobal.demo.api.info.BookCategoryInfo;
+
 public class BookDto {
     private int id;
 
     private String name;
 
-    private BookCategoryDto bookCategoryDto;
+    private BookCategoryInfo bookCategory;
 
     public BookDto() {
     }
@@ -26,11 +29,11 @@ public class BookDto {
         this.name = name;
     }
 
-    public BookCategoryDto getBookCategoryDto() {
-        return bookCategoryDto;
+    public BookCategoryInfo getBookCategory() {
+        return bookCategory;
     }
 
-    public void setBookCategoryDto(BookCategoryDto bookCategoryDto) {
-        this.bookCategoryDto = bookCategoryDto;
+    public void setBookCategory(BookCategoryInfo bookCategory) {
+        this.bookCategory = bookCategory;
     }
 }

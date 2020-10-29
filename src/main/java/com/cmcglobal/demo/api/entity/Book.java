@@ -1,6 +1,7 @@
 package com.cmcglobal.demo.api.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -10,9 +11,18 @@ public class Book {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
+    private Publisher publisher;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "book_category_id", referencedColumnName = "id")
-    private BookCategory bookCategory;
+    private Category category;
+
+    @OneToMany
+    private Set<Chapter> chapters;
+
+    @ManyToMany
+    private Set<Author> authors;
 
     public Book() {
     }
@@ -21,12 +31,12 @@ public class Book {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -37,12 +47,35 @@ public class Book {
         this.name = name;
     }
 
-    public BookCategory getBookCategory() {
-        return bookCategory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setBookCategory(BookCategory bookCategory) {
-        this.bookCategory = bookCategory;
-        bookCategory.getBooks().add(this);
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public Set<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(Set<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 }

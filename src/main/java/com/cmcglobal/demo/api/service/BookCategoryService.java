@@ -1,11 +1,13 @@
 package com.cmcglobal.demo.api.service;
 
 import com.cmcglobal.demo.api.dto.BookCategoryDto;
-import com.cmcglobal.demo.api.entity.BookCategory;
+
+import java.util.List;
 
 public interface BookCategoryService {
-    void createBookCategory(BookCategoryDto bookCategoryDto);
-    void updateBookCategory(Integer bookCategoryID, BookCategoryDto bookCategoryDto);
-    void getBookCategories();
-    void deleteBookCategory(Integer bookCategoryID);
+    BookCategoryDto createBookCategory(BookCategoryDto bookCategoryDto);
+    BookCategoryDto updateBookCategory(Integer bookCategoryID, BookCategoryDto bookCategoryDto);
+    List<BookCategoryDto> getBookCategories();
+    BookCategoryDto getBookCategory(Integer bookCategoryID);
+    boolean deleteBookCategory(Integer bookCategoryID);
 }

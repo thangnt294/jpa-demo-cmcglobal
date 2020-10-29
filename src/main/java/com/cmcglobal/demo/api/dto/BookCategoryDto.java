@@ -1,5 +1,7 @@
 package com.cmcglobal.demo.api.dto;
 
+import com.cmcglobal.demo.api.info.BookInfo;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +10,7 @@ public class BookCategoryDto {
 
     private String name;
 
-    private Set<BookDto> books;
+    private Set<BookInfo> books;
 
     public BookCategoryDto(){
         books = new HashSet<>();
@@ -30,11 +32,12 @@ public class BookCategoryDto {
         this.name = name;
     }
 
-    public Set<BookDto> getBooks() {
+    public Set<BookInfo> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<BookDto> books) {
+    public void setBooks(Set<BookInfo> books) {
         this.books = books;
     }
+
 }
