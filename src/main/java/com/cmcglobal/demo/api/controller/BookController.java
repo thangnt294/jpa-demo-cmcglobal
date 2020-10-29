@@ -13,8 +13,11 @@ import java.util.List;
 @RequestMapping(value = "/api/book")
 public class BookController {
 
-    @Autowired
     private BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @PostMapping(value = "/create")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {

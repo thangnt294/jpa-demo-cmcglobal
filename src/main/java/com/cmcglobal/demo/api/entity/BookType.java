@@ -1,8 +1,21 @@
-package com.cmcglobal.demo.api.info;
+package com.cmcglobal.demo.api.entity;
 
-public class BookCategoryInfo {
+import javax.persistence.*;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class BookType {
+    @Id
+    @GeneratedValue
     private int id;
+
     private String name;
+
+    public BookType() {}
+
+    public BookType(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;

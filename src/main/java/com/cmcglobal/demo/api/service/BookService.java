@@ -1,6 +1,5 @@
 package com.cmcglobal.demo.api.service;
 
-import com.cmcglobal.demo.api.dto.BookDto;
 import com.cmcglobal.demo.api.entity.Book;
 
 import java.util.List;

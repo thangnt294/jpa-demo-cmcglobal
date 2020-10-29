@@ -6,14 +6,12 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "BookCategory")
-@Table(name = "book_category")
+@Entity
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "category_name")
     private String name;
 
     public Category() {

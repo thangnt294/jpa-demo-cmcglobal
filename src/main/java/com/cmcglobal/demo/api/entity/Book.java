@@ -1,5 +1,7 @@
 package com.cmcglobal.demo.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -11,17 +13,25 @@ public class Book {
 
     private String name;
 
-    @OneToOne
+    @Embedded
+    private Language mainLanguage;
+
+    @ElementCollection
+    private Set<Language> otherLanguages;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Publisher publisher;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "book_category_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JsonIgnore
     private Category category;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Chapter> chapters;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Author> authors;
 
     public Book() {
@@ -77,5 +87,29 @@ public class Book {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    public Language getLanguage() {
+        return mainLanguage;
+    }
+
+    public void setLanguage(Language mainLanguage) {
+        this.mainLanguage = mainLanguage;
+    }
+
+    public Language getMainLanguage() {
+        return mainLanguage;
+    }
+
+    public void setMainLanguage(Language mainLanguage) {
+        this.mainLanguage = mainLanguage;
+    }
+
+    public Set<Language> getOtherLanguages() {
+        return otherLanguages;
+    }
+
+    public void setOtherLanguages(Set<Language> otherLanguages) {
+        this.otherLanguages = otherLanguages;
     }
 }
