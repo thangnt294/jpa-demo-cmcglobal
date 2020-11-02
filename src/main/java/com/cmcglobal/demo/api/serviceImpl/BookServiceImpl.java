@@ -3,7 +3,6 @@ package com.cmcglobal.demo.api.serviceImpl;
 import com.cmcglobal.demo.api.entity.*;
 import com.cmcglobal.demo.api.repository.*;
 import com.cmcglobal.demo.api.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -24,12 +23,6 @@ public class BookServiceImpl implements BookService {
 
     AuthorRepository authorRepository;
 
-    @Autowired
-    BookTypeRepository bookTypeRepository;
-
-    @Autowired
-    PaperBookRepository paperBookRepository;
-
     public BookServiceImpl(BookRepository bookRepository, PublisherRepository publisherRepository, CategoryRepository categoryRepository, ChapterRepository chapterRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
@@ -40,18 +33,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book createBook(Book book) {
-        Set<Chapter> chapters = new HashSet<>();
-        chapters.addAll(book.getChapters());
-        Set<Author> authors = new HashSet<>();
-        authors.addAll(book.getAuthors());
+        Set<Chapter> chapters = new HashSet<>(book.getChapters());
+        Set<Author> authors = new HashSet<>(book.getAuthors());
         publisherRepository.save(book.getPublisher());
         categoryRepository.save(book.getCategory());
         chapterRepository.saveAll(chapters);
         authorRepository.saveAll(authors);
 
-        Book entity = bookRepository.save(book);
-//        entity.setName("NEW NAME");
-        return entity;
+        //        entity.setName("NEW NAME");
+        return bookRepository.save(book);
     }
 
     @Override
@@ -64,23 +54,18 @@ public class BookServiceImpl implements BookService {
         entity.setAuthors(book.getAuthors());
         entity.setChapters(book.getChapters());
         entity.setPublisher(book.getPublisher());
-        Book updatedEntity = bookRepository.save(entity);
-        return updatedEntity;
+        return bookRepository.save(entity);
     }
 
     @Override
     public List<Book> getBooks() {
-        List<Book> books = bookRepository.findAll();
-        return books;
+        return bookRepository.findAll();
     }
 
     @Override
     public Book getBook(Integer bookID) {
         Optional<Book> bookOptional = bookRepository.findById(bookID);
-        if (bookOptional.isPresent()) {
-            return bookOptional.get();
-        }
-        return null;
+        return bookOptional.orElse(null);
     }
 
     @Override

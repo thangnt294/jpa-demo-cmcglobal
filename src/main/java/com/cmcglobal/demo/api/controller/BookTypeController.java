@@ -1,6 +1,5 @@
 package com.cmcglobal.demo.api.controller;
 
-import com.cmcglobal.demo.api.entity.Book;
 import com.cmcglobal.demo.api.entity.BookType;
 import com.cmcglobal.demo.api.entity.DigitalBook;
 import com.cmcglobal.demo.api.entity.PaperBook;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/bookType")
 public class BookTypeController {
-    private BookTypeService bookTypeService;
+    private final BookTypeService bookTypeService;
 
     public BookTypeController(BookTypeService bookTypeService) {
         this.bookTypeService = bookTypeService;

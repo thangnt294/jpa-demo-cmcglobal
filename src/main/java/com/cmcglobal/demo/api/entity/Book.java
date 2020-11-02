@@ -1,6 +1,7 @@
 package com.cmcglobal.demo.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -8,7 +9,7 @@ import java.util.Set;
 @Entity
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     private String name;
@@ -19,16 +20,16 @@ public class Book {
     @ElementCollection
     private Set<Language> otherLanguages;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToOne
+//    @NotFound(action = NotFoundAction.EXCEPTION)
     private Publisher publisher;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @JsonIgnore
+    @NotFound(action = NotFoundAction.IGNORE)
     private Category category;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY) // default da la LAZY
     private Set<Chapter> chapters;
 
     @ManyToMany(fetch = FetchType.LAZY)
