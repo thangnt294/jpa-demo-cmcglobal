@@ -1,15 +1,13 @@
 package com.cmcglobal.demo.api.entity;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "book_table")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private int id;
 
     private String name;
@@ -21,15 +19,13 @@ public class Book {
     private Set<Language> otherLanguages;
 
     @OneToOne
-//    @NotFound(action = NotFoundAction.EXCEPTION)
     private Publisher publisher;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @NotFound(action = NotFoundAction.IGNORE)
     private Category category;
 
-    @OneToMany(fetch = FetchType.LAZY) // default da la LAZY
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Chapter> chapters;
 
     @ManyToMany(fetch = FetchType.LAZY)

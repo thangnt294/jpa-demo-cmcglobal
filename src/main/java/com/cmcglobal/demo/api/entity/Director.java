@@ -1,23 +1,17 @@
 package com.cmcglobal.demo.api.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Chapter {
+public class Director {
     @Id
     @GeneratedValue
     private int id;
 
     private String name;
 
-    public Chapter() {}
-
-    public Chapter(String name) {
-        this.name = name;
-    }
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Organization organization;
 
     public int getId() {
         return id;
@@ -33,5 +27,13 @@ public class Chapter {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }

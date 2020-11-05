@@ -4,6 +4,7 @@ import com.cmcglobal.demo.api.entity.*;
 import com.cmcglobal.demo.api.repository.*;
 import com.cmcglobal.demo.api.service.BookService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +33,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+//    @Transactional
     public Book createBook(Book book) {
         Set<Chapter> chapters = new HashSet<>(book.getChapters());
         Set<Author> authors = new HashSet<>(book.getAuthors());
