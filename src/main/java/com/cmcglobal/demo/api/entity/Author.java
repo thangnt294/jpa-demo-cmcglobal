@@ -6,10 +6,13 @@ import java.util.Set;
 @Entity
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     private String name;
+
+    @ManyToMany
+    private Set<Book> books;
 
     public Author() {
     }
@@ -34,4 +37,11 @@ public class Author {
         this.name = name;
     }
 
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 }

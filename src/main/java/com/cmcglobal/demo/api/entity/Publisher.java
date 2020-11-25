@@ -1,20 +1,14 @@
 package com.cmcglobal.demo.api.entity;
 
-import org.hibernate.engine.internal.Cascade;
-
 import javax.persistence.*;
 
 @Entity
 public class Publisher {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     private String name;
-
-    @OneToOne(mappedBy = "publisher")
-    @MapsId
-    private Book book;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Company company;

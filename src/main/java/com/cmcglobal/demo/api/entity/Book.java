@@ -1,10 +1,12 @@
 package com.cmcglobal.demo.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.engine.internal.Cascade;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "book_table")
 public class Book {
     @Id
     @GeneratedValue
@@ -18,11 +20,11 @@ public class Book {
     @ElementCollection
     private Set<Language> otherLanguages;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Publisher publisher;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+//    @JoinColumn(name = "category_name", referencedColumnName = "name")
     private Category category;
 
     @OneToMany(fetch = FetchType.LAZY)

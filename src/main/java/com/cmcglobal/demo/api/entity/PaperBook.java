@@ -1,8 +1,6 @@
 package com.cmcglobal.demo.api.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 @Entity
 public class PaperBook extends BookType{

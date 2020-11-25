@@ -42,8 +42,14 @@ public class BookServiceImpl implements BookService {
         chapterRepository.saveAll(chapters);
         authorRepository.saveAll(authors);
 
-        //        entity.setName("NEW NAME");
-        return bookRepository.save(book);
+        Book entity = bookRepository.save(book);
+        entity.setName("NEW NAME");
+        Publisher newPub = entity.getPublisher();
+        newPub.setName("New Pub");
+        entity.setPublisher(newPub);
+        entity = bookRepository.save(entity);
+        return entity;
+//        return bookRepository.save(book);
     }
 
     @Override
