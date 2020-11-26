@@ -1,4 +1,4 @@
-package com.cmcglobal.demo.api.entity;
+package com.cmcglobal.demo.api.others;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

@@ -1,12 +1,13 @@
 package com.cmcglobal.demo.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.engine.internal.Cascade;
+import com.cmcglobal.demo.api.others.Language;
+import com.cmcglobal.demo.api.others.MyEntityListener;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@EntityListeners(MyEntityListener.class)
 public class Book {
     @Id
     @GeneratedValue
